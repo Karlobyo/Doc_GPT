@@ -24,3 +24,4 @@ pytesseract
 fastapi
 tf-keras
 uvicorn
+tesseract

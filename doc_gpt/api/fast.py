@@ -1,5 +1,5 @@
 
-from doc_gpt.dl_logic.registry import load_summary_model
+from doc_gpt.dl_logic.registry import load_summary_model, load_document_model
 
 #from transformers import pipeline
 
@@ -19,7 +19,7 @@ app.add_middleware(
 
 app.state.model = load_summary_model()
 
-@app.get("/predict")
+@app.get("/summarize")
 def predict(question: str):
     """
     Summarizes input text.
@@ -31,6 +31,26 @@ def predict(question: str):
     response = model(question)
 
     output = response[0]["summary_text"]
+
+    # ⚠️ fastapi only accepts simple Python data types as a return value
+    # among them dict, list, str, int, float, bool
+    # in order to be able to convert the api response to JSON
+    return output
+
+app.state.model = load_document_model()
+
+@app.get("/document")
+def predict(doc_url: str, question: str):
+    """
+    Gives you answers about input document
+    """
+
+    model = app.state.model
+    assert model is not None
+
+    response = model(doc_url, question)
+
+    output = response[0]["answer"]
 
     # ⚠️ fastapi only accepts simple Python data types as a return value
     # among them dict, list, str, int, float, bool
