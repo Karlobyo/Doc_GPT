@@ -4,4 +4,4 @@ install:
 
 
 run_api:
-	uvicorn taxifare.api.fast:app --reload
+	uvicorn doc_gpt.api.fast:app --reload

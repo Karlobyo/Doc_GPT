@@ -27,3 +27,4 @@ Requires-Dist: torch
 Requires-Dist: pytesseract
 Requires-Dist: fastapi
 Requires-Dist: tf-keras
+Requires-Dist: uvicorn
