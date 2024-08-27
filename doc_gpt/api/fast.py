@@ -61,8 +61,8 @@ def document(doc_url: str, question: str):
     return output
 
 
-@app.get("/document_2")
-def document_2(image_path, question: str):
+@app.get("/document_upload")
+def document_upload(image_path: str, question: str):
     """
     Gives you answers about input document
     """
