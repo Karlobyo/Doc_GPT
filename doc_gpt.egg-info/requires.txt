@@ -21,6 +21,9 @@ transformers
 tensorflow
 torch
 pytesseract
-fastapi
+tesseract
 tf-keras
+fastapi
 uvicorn
+pydantic
+docquery

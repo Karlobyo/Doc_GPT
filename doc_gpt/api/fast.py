@@ -61,6 +61,28 @@ def document(doc_url: str, question: str):
     return output
 
 
+@app.get("/document_2")
+def document_2(image_path, question: str):
+    """
+    Gives you answers about input document
+    """
+
+    app.state.model = load_document_model()
+
+    model = app.state.model
+    assert model is not None
+
+    response = model(image_path, question)
+
+    output = response[0]["answer"]
+
+    # ⚠️ fastapi only accepts simple Python data types as a return value
+    # among them dict, list, str, int, float, bool
+    # in order to be able to convert the api response to JSON
+    return output
+
+
+
 @app.get("/")
 def root():
     return dict(greeting="Hello")

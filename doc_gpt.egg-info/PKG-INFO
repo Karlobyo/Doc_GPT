@@ -25,6 +25,9 @@ Requires-Dist: transformers
 Requires-Dist: tensorflow
 Requires-Dist: torch
 Requires-Dist: pytesseract
-Requires-Dist: fastapi
+Requires-Dist: tesseract
 Requires-Dist: tf-keras
+Requires-Dist: fastapi
 Requires-Dist: uvicorn
+Requires-Dist: pydantic
+Requires-Dist: docquery
