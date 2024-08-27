@@ -17,13 +17,14 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-app.state.model = load_summary_model()
 
 @app.get("/summarize")
 def predict(question: str):
     """
     Summarizes input text.
     """
+
+    app.state.model = load_summary_model()
 
     model = app.state.model
     assert model is not None
@@ -37,13 +38,15 @@ def predict(question: str):
     # in order to be able to convert the api response to JSON
     return output
 
-app.state.model = load_document_model()
+#app.state.model = load_document_model()
 
 @app.get("/document")
-def document(doc_url: str, question: str):
+def predict(doc_url: str, question: str):
     """
     Gives you answers about input document
     """
+
+    app.state.model = load_document_model()
 
     model = app.state.model
     assert model is not None
