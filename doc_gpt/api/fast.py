@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 @app.get("/summarize")
-def predict(question: str):
+def summarize(question: str):
     """
     Summarizes input text.
     """
@@ -41,7 +41,7 @@ def predict(question: str):
 #app.state.model = load_document_model()
 
 @app.get("/document")
-def predict(doc_url: str, question: str):
+def document(doc_url: str, question: str):
     """
     Gives you answers about input document
     """
