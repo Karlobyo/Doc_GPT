@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 @app.get("/summarize")
-def summarize(question: str):
+def summarize(text: str):
     """
     Summarizes input text.
     """
@@ -29,10 +29,11 @@ def summarize(question: str):
     model = app.state.model
     assert model is not None
 
-    response = model(question)
+    response = model(text)
 
     output = response[0]["summary_text"]
-
+    
+    #breakpoint()
     # ⚠️ fastapi only accepts simple Python data types as a return value
     # among them dict, list, str, int, float, bool
     # in order to be able to convert the api response to JSON
@@ -86,3 +87,10 @@ def document_upload(image_path: str, question: str):
 @app.get("/")
 def root():
     return dict(greeting="Hello")
+
+
+
+
+if __name__=='__main__':
+    summarize("""Endometriosis often causes severe pain in the pelvis, especially during menstrual periods. Some people also have pain during sex or when using the bathroom. Some people have trouble getting pregnant.
+Some people with endometriosis dont have any symptoms. For those who do, a common symptom is pain in the lower part of the belly (pelvis).""")
