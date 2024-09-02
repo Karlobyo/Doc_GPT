@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 @app.get("/summarize")
-def summarize(text: str):
+def summarize(text: str, min_length: int = 50, max_length: int = 200):
     """
     Summarizes input text.
     """
@@ -29,7 +29,7 @@ def summarize(text: str):
     model = app.state.model
     assert model is not None
 
-    response = model(text)
+    response = model(text, min_length=min_length, max_length=max_length)
 
     output = response[0]["summary_text"]
 
