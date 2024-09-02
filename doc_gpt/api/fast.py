@@ -1,5 +1,5 @@
 
-from doc_gpt.dl_logic.registry import load_summary_model, load_document_model
+from doc_gpt.dl_logic.registry import load_summary_model, load_document_model, load_document_model_text
 
 #from transformers import pipeline
 
@@ -32,7 +32,7 @@ def summarize(text: str):
     response = model(text)
 
     output = response[0]["summary_text"]
-    
+
     #breakpoint()
     # ⚠️ fastapi only accepts simple Python data types as a return value
     # among them dict, list, str, int, float, bool
@@ -42,24 +42,40 @@ def summarize(text: str):
 #app.state.model = load_document_model()
 
 @app.get("/document")
-def document(doc_url: str, question: str):
+def document(doc: str, question: str):
     """
     Gives you answers about input document
     """
 
-    app.state.model = load_document_model()
+    if not doc.startswith("http"):
 
-    model = app.state.model
-    assert model is not None
+        app.state.model = load_document_model_text()
 
-    response = model(doc_url, question)
+        model = app.state.model
+        assert model is not None
 
-    output = response[0]["answer"]
+        qa = {"question": question, "context": doc}
 
+        response = model(qa)
+
+        output = response["answer"].capitalize()
+
+        return output
+
+    else:
+        app.state.model = load_document_model()
+
+        model = app.state.model
+        assert model is not None
+
+        response = model(doc, question)
+
+        output = response[0]["answer"]
     # ⚠️ fastapi only accepts simple Python data types as a return value
     # among them dict, list, str, int, float, bool
     # in order to be able to convert the api response to JSON
-    return output
+        return output
+
 
 
 @app.get("/document_upload")
