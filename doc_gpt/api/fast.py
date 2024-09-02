@@ -42,39 +42,23 @@ def summarize(text: str, min_length: int = 50, max_length: int = 200):
 #app.state.model = load_document_model()
 
 @app.get("/document")
-def document(doc: str, question: str):
+def document(doc: str, question: str, min_length: int = 5, max_length: int = 20):
     """
     Gives you answers about input document
     """
 
-    if not doc.startswith("http"):
+    app.state.model = load_document_model_text()
 
-        app.state.model = load_document_model_text()
+    model = app.state.model
+    assert model is not None
 
-        model = app.state.model
-        assert model is not None
+    qa = {"question": question, "context": doc}
 
-        qa = {"question": question, "context": doc}
+    response = model(qa)
 
-        response = model(qa)
+    output = response["answer"].capitalize()
 
-        output = response["answer"].capitalize()
-
-        return output
-
-    else:
-        app.state.model = load_document_model()
-
-        model = app.state.model
-        assert model is not None
-
-        response = model(doc, question)
-
-        output = response[0]["answer"]
-    # ⚠️ fastapi only accepts simple Python data types as a return value
-    # among them dict, list, str, int, float, bool
-    # in order to be able to convert the api response to JSON
-        return output
+    return output
 
 
 
