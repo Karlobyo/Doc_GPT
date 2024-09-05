@@ -1,0 +1,10 @@
+transformers
+tf-keras
+tensorflow
+torch
+
+pytesseract
+tesseract
+
+fastapi
+uvicorn
