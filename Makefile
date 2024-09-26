@@ -1,10 +1,10 @@
 
-# install:
-# 	@pip install -e . --config-settings editable_mode=compat
+install:
+	@pip install -e . --config-settings editable_mode=compat
 
 
-# run_api:
-# 	@uvicorn doc_gpt.api.fast:app --reload
+run_api:
+	@uvicorn doc_gpt.api.fast:app --reload
 
 
 
