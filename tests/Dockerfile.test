@@ -19,4 +19,3 @@ COPY ...doc_gpt.api api
 EXPOSE 8000
 
 CMD uvicorn api.fast:app --host 0.0.0.0 --port $PORT
-doc_gpt/api
