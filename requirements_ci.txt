@@ -1,4 +1,8 @@
 pytest
 pylint
 transformers
-pytorch
+tensorflow
+torch
+pytesseract
+tesseract
+tf-keras
