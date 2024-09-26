@@ -1,5 +1,5 @@
 import unittest
-from doc_gpt.api.fast import load_summary_model
+from doc_gpt.dl_logic.registry import load_summary_model
 
 class TestEx(unittest.TestCase):
     def test_ex(self):
