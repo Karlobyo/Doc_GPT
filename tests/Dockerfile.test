@@ -11,7 +11,7 @@ RUN pip install --upgrade pip cython wheel
 RUN pip install -r requirements.txt
 
 COPY doc_gpt doc_gpt
-COPY setup_test.py setup.py
+COPY setup.py setup.py
 RUN pip install .
 
 #COPY ...doc_gpt.api api
