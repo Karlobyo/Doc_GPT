@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 @app.get("/summarize")
-def summarize(text: str, min_length: int = 50, max_length: int = 200):
+def summarize(text: str, min_length: int = 20, max_length: int = 50):
     """
     Summarizes input text.
     """
