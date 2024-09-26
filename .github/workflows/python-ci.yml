@@ -31,5 +31,14 @@ jobs:
         pip install -r requirements_ci.txt
 
     # Fourth step: run tests with Pytest
+    - name: Build test Docker image
+      run: docker build -f tests/Dockerfile.test -t api-test .
+
+    - name: Run test Docker container
+      run: docker run -d -e PORT=8000 -p 8000:8000 --name api-test-container -p 8080:8000 api-test
+
     - name: Run tests
       run: make pytest
+
+    - name: Stop test Docker container
+      run: docker stop api-test-container && docker rm api-test-container
