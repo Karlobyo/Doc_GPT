@@ -14,8 +14,9 @@ RUN pip install -r requirements.txt
 # COPY setup.py setup.py
 # RUN pip install .
 
-COPY doc_gpt.api doc_gpt.api
+COPY ...doc_gpt.api api
 
 EXPOSE 8000
 
-CMD uvicorn doc_gpt.api.fast:app --host 0.0.0.0 --port $PORT
+CMD uvicorn api.fast:app --host 0.0.0.0 --port $PORT
+doc_gpt/api
