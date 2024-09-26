@@ -1,0 +1,21 @@
+FROM python:3.10.6-buster
+
+
+# RUN apt-get update && apt-get install -y \
+# libhdf5-dev \
+# && rm -rf /var/lib/apt/lists/*
+
+
+COPY requirements_test.txt requirements.txt
+RUN pip install --upgrade pip cython wheel
+RUN pip install -r requirements.txt
+
+COPY doc_gpt doc_gpt
+COPY setup.py setup.py
+RUN pip install .
+
+#COPY ...doc_gpt.api api
+
+#EXPOSE 8000
+
+CMD uvicorn api.fast_root:app --host 0.0.0.0 --port $PORT
